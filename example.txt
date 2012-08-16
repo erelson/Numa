@@ -1,0 +1,95 @@
+#include "hardware.h"
+
+// Initialise the hardware
+void appInitHardware(void) {
+	initHardware();
+}
+// Initialise the software
+TICK_COUNT appInitSoftware(TICK_COUNT loopStart){
+	return 0;
+}
+// This is the main loop
+TICK_COUNT appControl(LOOP_COUNT loopCount, TICK_COUNT loopStart) {
+
+	// -------- Start Switch/Button-------
+	// Switch/Button - see switch.h
+	
+	// To test if it is pressed then
+	if(SWITCH_pressed(&button)){
+		// pressed
+	}
+	
+	// To test if it is released then
+	if(SWITCH_released(&button)){
+		// released
+	}
+	// -------- End   Switch/Button-------
+
+	// -------- Start Dynamixel AX-12 Driver-------
+	// Dump the current values for all servos on UART3toAX12_driver to rprintf
+	ax12DumpAll(&UART3toAX12_driver);
+	// -------- End   Dynamixel AX-12 Driver-------
+
+	// -------- Start Sharp GP2-------
+	// Read the Sharp GP2 and store the result in distance.distance.cm
+	distanceRead(distance);
+	
+	// The value can be printed using %u eg rprintf("Distance=%u",distance.distance.cm);
+	// or dumped using:
+	rprintf("distance: ");
+	distanceDump(distance);
+	rprintfCRLF();
+	// -------- End   Sharp GP2-------
+
+	// -------- Start Sharp GP2-------
+	// Read the Sharp GP2 and store the result in distance2.distance.cm
+	distanceRead(distance2);
+	
+	// The value can be printed using %u eg rprintf("Distance=%u",distance2.distance.cm);
+	// or dumped using:
+	rprintf("distance2: ");
+	distanceDump(distance2);
+	rprintfCRLF();
+	// -------- End   Sharp GP2-------
+
+	// -------- Start Actuators -------
+	// To control your.motors/servos then see actuators.h in the manual
+	// To retrieve the required speed of servo1 use:
+	// DRIVE_SPEED speed=act_getSpeed(servo1);
+	// To set the required speed of servo1 use:
+	// act_setSpeed(servo1,speed);
+	// This example will move the motors back and forth using the loopStart time:
+	TICK_COUNT ms = loopStart / 1000;		// Get current time in ms
+	int16_t now = ms % (TICK_COUNT)10000; 	// 10 sec for a full swing
+	if(now >= (int16_t)5000){				// Goes from 0ms...5000ms
+		now = (int16_t)10000 - now;			// then 5000ms...0ms
+	}
+	// Map it into DRIVE_SPEED range
+	DRIVE_SPEED speed = interpolate(now, 0, 5000, DRIVE_SPEED_MIN, DRIVE_SPEED_MAX);
+	// Set speed for all motors/servos
+	act_setSpeed(&servo1,speed);
+	act_setSpeed(&servo11,speed);
+	act_setSpeed(&servo12,speed);
+	act_setSpeed(&servo13,speed);
+	act_setSpeed(&servo14,speed);
+	act_setSpeed(&servo21,speed);
+	act_setSpeed(&servo22,speed);
+	act_setSpeed(&servo23,speed);
+	act_setSpeed(&servo24,speed);
+	act_setSpeed(&servo31,speed);
+	act_setSpeed(&servo32,speed);
+	act_setSpeed(&servo33,speed);
+	act_setSpeed(&servo34,speed);
+	act_setSpeed(&servo41,speed);
+	act_setSpeed(&servo42,speed);
+	act_setSpeed(&servo43,speed);
+	act_setSpeed(&servo44,speed);
+	act_setSpeed(&servo51,speed);
+	act_setSpeed(&servo52,speed);
+	act_setSpeed(&LeftGun,speed);
+	act_setSpeed(&RightGun,speed);
+	act_setSpeed(&antijam,speed);
+	// -------- End   Actuators -------
+
+	return 0;
+}
