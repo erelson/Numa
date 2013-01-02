@@ -113,9 +113,6 @@ int CmdrReadMsgs(){
 						int pan_add = (-(float)lookH)/17;
 						int tilt_add = (-(float)lookV)/25;
 						
-						
-						// pan_pos = interpolate( (int)vals[1],0,255,servo51Max,servo51Min);
-						
 						pan_pos = CLAMP(pan_pos + pan_add, servo51Min, servo51Max);
 						tilt_pos = CLAMP(tilt_pos + tilt_add, servo52Min, servo52Max);
 						
