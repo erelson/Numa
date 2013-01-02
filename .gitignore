@@ -1,0 +1,41 @@
+# Ignore the files produced by the compiler or makefile as a side
+# effect of compilation.
+*.o
+*.npp
+*.elf
+*.bin
+*.srec
+*.aws
+*.cpp.txt
+*.h.txt
+
+makefile
+
+# From Wixel's gitignore...
+*.adb
+*.asm
+*.cdb
+*.d
+*.hex
+*.ihx
+*.lk
+*.lib
+*.lnk
+*.lst
+*.map
+*.mem
+*.omf
+*.swp
+*.rel
+*.py~
+*.sym
+*.?~
+*.??~
+*.???~
+
+lib/*
+dep/*
+
+# Ignore eclipse files
+.cproject
+.project
