@@ -25,7 +25,7 @@ makefile
 *.map
 *.mem
 *.omf
-*.swp
+*.sw?
 *.rel
 *.py~
 *.sym

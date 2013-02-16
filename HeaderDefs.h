@@ -230,7 +230,6 @@ extern int16_t now1;
 
 
 extern TICK_COUNT guns_firing_start_time;
-extern TICK_COUNT guns_firing_start_time;
 extern TICK_COUNT guns_firing_duration;
 extern TICK_COUNT spdChngOffset;
 
